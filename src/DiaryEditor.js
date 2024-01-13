@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const DiaryEditor = () => {
+const DiaryEditor = ({onCreate}) => {
   
   const writerInput = useRef();
   const contentInput = useRef();
@@ -28,8 +28,16 @@ const DiaryEditor = () => {
       contentInput.current.focus();
       return;
     }
-
+    
+    onCreate(state.writer, state.content, state.emotion);
     alert("저장 성공");
+
+    // 일기 작성 후 폼에 저장된 데이터가 출력되지 않게 초기화함
+    setState({
+      writer: "",
+      content: "",
+      emotion: 1
+    });
   };
 
   return (
