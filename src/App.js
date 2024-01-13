@@ -31,7 +31,7 @@ function App() {
 
   const [data, setData] = useState([]); // 배열로 초기값 생성
   
-  const diaryNo = useRef(0);
+  const diaryNo = useRef(1);
 
   // 일기 작성
   const onCreate = (writer, content, emotion) => {
@@ -47,10 +47,17 @@ function App() {
     setData([newItem, ...data]);
   };
 
+  // 일기 삭제
+  const onDelete = (targetId) => {
+    console.log(`${targetId}번째 일기가 삭제되었습니다.`);
+    const newDiaryList = data.filter((it) => it.id !== targetId);
+    setData(newDiaryList);
+  };
+
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList diaryList={data}/>
+      <DiaryList onDelete={onDelete} diaryList={data}/>
     </div>
   );
 }
